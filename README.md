@@ -2,6 +2,22 @@
 
 As we know, Github does not support uploading and managing files larger than 100MB by default. If your project contains large files, you may check out Git LFS. Using this tool, you can manage/upload & control your project/repo having sizes larger than 100MB. Note that tha maximum repository size is 10GB for free tier. If you want to increase the size further, Github provides organizational level grants where it's a pay as you scale model.
 
+## What is Git LFS
+Git is a **distributed version** control system, meaning the entire history of the repository is transferred to the client during the cloning process. For projects containing large files, particularly large files that are modified regularly, this initial clone can take a huge amount of time, as every version of every file has to be downloaded by the client. Git LFS (Large File Storage) is a Git extension to reduce the impact of large files in your repository by downloading the relevant versions of them *lazily*. Specifically, large files are downloaded during the checkout process rather than during cloning or fetching.
+
+Git LFS does this by replacing large files in your repository with tiny pointer files. During normal usage, you'll never see these pointer files as they are handled automatically by Git LFS:
+
+When you add a file to your repository, Git LFS replaces its contents with a pointer, and stores the file contents in a local Git LFS cache. 
+
+![git lfs - git add](git_add.svg)
+When you push new commits to the server, any Git LFS files referenced by the newly pushed commits are transferred from your local Git LFS cache to the remote Git LFS store tied to your Git repository. 
+
+![git lfs - git push](git_push.svg)
+When you checkout a commit that contains Git LFS pointers, they are replaced with files from your local Git LFS cache, or downloaded from the remote Git LFS store.
+
+![git lfs - git checkout](git_checkout.svg)
+
+For more information, please refer to this [tutorial](https://www.atlassian.com/git/tutorials/git-lfs)
 ## Installation of Git LFS
 * Windows
   * Download and install from the [Git LFS binary execution file](https://git-lfs.github.com/)
